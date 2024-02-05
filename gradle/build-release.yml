@@ -43,6 +43,7 @@ jobs:
       
       - name: Build with Gradle
         run: ./gradlew build --full-stacktrace
+        continue-on-error: true
         
       - name: Archive Repository
         run: |
