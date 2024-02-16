@@ -55,12 +55,14 @@ jobs:
         with:
           name: Project-${{ steps.vars.outputs.sha_short }}
           path: build/libs
+        continue-on-error: true
       
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: dev_env-${{ steps.vars.outputs.sha_short }}
           path: dev_env.zip
+        continue-on-error: true
       
       - name: Release Files
         uses: softprops/action-gh-release@v1
@@ -77,3 +79,4 @@ jobs:
           generate_release_notes: true
         env:
           GITHUB_REPOSITORY: MediumCraft/Project
+        continue-on-error: true
