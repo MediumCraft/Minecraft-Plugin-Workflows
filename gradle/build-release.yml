@@ -3,8 +3,16 @@ name: Build Project
 # For each push on all branches
 on:
   push:
-    branches:
-      - '*'
+    paths:
+    - 'src/**'
+    - 'build.gradle'
+    - 'build.gradle.kts'
+    - 'settings.gradle'
+    - 'settings.gradle.kts'
+    - 'gradle.properties'
+    - 'gradlew'
+    - 'gradlew.bat'
+    - '.github/workflows/build-release.yml'
   pull_request:
   workflow_dispatch:
 
