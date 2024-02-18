@@ -1,15 +1,16 @@
 name: Build and Release [Beta]
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Just to run it manually. You should have seen my older version which requires me to change a text document.
   push:
     paths:
-    - 'src/**'
+    - 'src/**' # The source code directory is usually different. This is the most basic
     - 'pom.xml'
-    - '.github/workflows/build-release.yml'
+    - '.github/workflows/build-release.yml' # Make sure this is the same as the file name
 
 permissions:
-  contents: write
+  contents: write # Let the actions runner to have write access to the repository
+  # Might get hacked but it's only going to last for the duration of the workflow. Besides, it's hard.
 
 jobs:
   build:
@@ -34,9 +35,10 @@ jobs:
         cache: 'maven'
 
     - name: Build and Test
-      run: mvn clean package install
-      continue-on-error: true
+      run: mvn clean package install # Sometimes it is something else! Make sure to look hard enough!
+      continue-on-error: true # So it uploads dev_env.zip
     
+    # Get the short commit SHA to mark versions, search releases by commit
     - name: Set outputs
       id: short_sha
       run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
@@ -76,4 +78,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_KEY }}
         GITHUB_REPOSITORY: MediumCraft/Project
-      continue-on-error: true
+      continue-on-error: true # So it doesn't fail when files get too large
