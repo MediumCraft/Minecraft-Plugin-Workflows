@@ -13,7 +13,6 @@ on:
     - 'gradlew'
     - 'gradlew.bat'
     - '.github/workflows/build-release.yml'
-  pull_request:
   workflow_dispatch:
 
 permissions:
